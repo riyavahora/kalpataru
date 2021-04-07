@@ -19,3 +19,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/contact', 'HomeController@contact');
 Route::get('/login', 'HomeController@login');
+Route::get('/register', 'HomeController@register');

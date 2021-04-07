@@ -206,7 +206,7 @@
                             <!--   <li><a href="order_history.php"><i class="fa fa-history" style="margin-right: 15px;"></i>ORDER SUMMARY</a></li> -->
                             <li><a href="change_pwd.php"><i class="fa fa-key"
                                         style="margin-right: 15px;"></i><?= $lang['nav-chng_pwd'] ?></a></li>
-                            <li><a href="login.php"><i class="fa fa-sign-out"
+                            <li><a href="login"><i class="fa fa-sign-out"
                                         style="margin-right: 15px;"></i><?= $lang['nav-sign_out'] ?></a></li>
                         </ul>
                     </li>

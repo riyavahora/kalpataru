@@ -42,6 +42,11 @@ class HomeController extends Controller
         return view('login', $this->getParams());
     }
 
+    public function register()
+    {
+        return view('register', $this->getParams());
+    }
+
     private function getParams() {
         return [
             'lang' => $this->languagesArray,
