@@ -1,4 +1,5 @@
 @include('header')
+
 <style>
     fieldset {
         border: thin solid #ccc;
@@ -7,17 +8,21 @@
         padding-left: 40px;
         background: #fbfbfb;
     }
+
     legend {
         color: #678;
     }
+
     .form-control {
         width: 98%;
     }
+
     label small {
         color: #678 !important;
     }
+
     span.req {
-        color:maroon;
+        color: maroon;
         font-size: 112%;
     }
 </style>
@@ -36,88 +41,127 @@
 <div class="diamond_bg_class">
     <div class="container">
         <div class="row">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             <div class="col-md-12 fadeInLeft" style="padding: 3%;z-index: 1099;">
-                <form action="" method="post" id="registerForm" role="form">
-                    <fieldset><legend class="text-center"><?= $lang['sign-up-alert'] ?> <span class="req"><small> <?= $lang['req'] ?></small></span></legend>
+                {{-- <form action="{{ action('HomeController@createUser') }}" method="post" id="registerForm"
+                role="form"> --}}
+                <form action="createUser" method="post" id="registerForm" role="form">
+                    <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+
+                    <fieldset>
+                        <legend class="text-center"><?= $lang['sign-up-alert'] ?> <span class="req"><small>
+                                    <?= $lang['req'] ?></small></span></legend>
 
                         <label class="ErrorMsg"></label>
-                        <label for="firstname" class='pull-left' style="padding-top:4%;"><span class="req pull-right">* </span> <?= $lang['fname'] ?> </label>
+                        <label for="firstname" class='pull-left' style="padding-top:4%;"><span class="req pull-right">*
+                            </span> <?= $lang['fname'] ?> </label>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="firstname" id = "firstName" onkeyup = "Validate(this)" required placeholder="As appears officially"/>
+                            <input class="form-control" type="text" name="firstname" id="firstName"
+                                onkeyup="Validate(this)" required placeholder="As appears officially" />
                             <div id="errFirst"></div>
                         </div>
-                        <label for="lastname" class='pull-left'><span class="req pull-right">* </span> <?= $lang['lname'] ?> </label>
+                        <label for="lastname" class='pull-left'><span class="req pull-right">* </span>
+                            <?= $lang['lname'] ?> </label>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="lastname" id = "lastName" onkeyup = "Validate(this)" placeholder="As appears officially" required />
+                            <input class="form-control" type="text" name="lastname" id="lastName"
+                                onkeyup="Validate(this)" placeholder="As appears officially" required />
                             <div id="errLast"></div>
                         </div>
-                        <label for="companyname" class="pull-left"><span class="req pull-right">* </span> <?= $lang['cname'] ?> </label>
+                        <label for="companyname" class="pull-left"><span class="req pull-right">* </span>
+                            <?= $lang['cname'] ?> </label>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="companyname" id = "companyName" onkeyup = "Validate(this)" placeholder="Company Name of an account applicant as appears officially"/>
+                            <input class="form-control" type="text" name="companyname" id="companyName"
+                                onkeyup="Validate(this)"
+                                placeholder="Company Name of an account applicant as appears officially" />
                             <div id="errFirst"></div>
                         </div>
                         <label for="addline1" class="pull-left"> <?= $lang['addlin1'] ?> </label>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="addline1" id = "addressLine1" onkeyup = "address_validate(this)" placeholder="Office No. -Building Name -Street Name"/>
+                            <input class="form-control" type="text" name="addline1" id="addressLine1"
+                                onkeyup="address_validate(this)" placeholder="Office No. -Building Name -Street Name" />
                             <div id="errFirst"></div>
                         </div>
                         <label for="addline2" class="pull-left"> <?= $lang['addlin2'] ?> </label>
                         <div class="col-md-12">
                             <div class="form-group col-md-3">
-                                <input class="form-control" type="text" name="cityname" id = "addressCity" onkeyup = "Validate(this)" required placeholder="City Name"/>
+                                <input class="form-control" type="text" name="cityname" id="addressCity"
+                                    onkeyup="Validate(this)" required placeholder="City Name" />
                             </div>
                             <div class="form-group col-md-3">
-                                <input class="form-control" type="text" name="statename" id = "addressState" onkeyup = "Validate(this)" required placeholder="State Name" />
+                                <input class="form-control" type="text" name="statename" id="addressState"
+                                    onkeyup="Validate(this)" required placeholder="State Name" />
                             </div>
                             <div class="form-group col-md-3">
-                                <input class="form-control" type="text" name="countryename" id = "addressCountry" onkeyup = "Validate(this)" required placeholder="Country Name"/>
+                                <input class="form-control" type="text" name="countryename" id="addressCountry"
+                                    onkeyup="Validate(this)" required placeholder="Country Name" />
                                 <div id="errFirst"></div>
                             </div>
                         </div>
                         <label for="officephonenumber" class="pull-left"><?= $lang['ophoneno'] ?> </label>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="text" name="phonenumber" id="phone" class="form-control phone" onkeyup="validatephone(this);" placeholder="Phone Number"/>
+                                <input type="text" name="phonenumber" id="phone" class="form-control phone"
+                                    onkeyup="validatephone(this);" placeholder="Phone Number" />
                             </div>
                         </div>
-                        <label for="mobilenumber" class="pull-left"><span class="req pull-right">* </span><?= $lang['link-mobile'] ?> </label>
+                        <label for="mobilenumber" class="pull-left"><span class="req pull-right">*
+                            </span><?= $lang['link-mobile'] ?> </label>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input required type="text" name="mobilenumber" id="mobile" class="form-control phone" onkeyup="validatephone(this);" placeholder="Mobile Number (Whatsapp registered)"/>
+                                <input required type="text" name="mobilenumber" id="mobile" class="form-control phone"
+                                    onkeyup="validatephone(this);" placeholder="Mobile Number (Whatsapp registered)" />
                             </div>
                         </div>
                         <label for="wechat" class="pull-left"><?= $lang['link-wechat'] ?> </label>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="text" name="wechatid" id="wechat" class="form-control phone" placeholder="Wechat ID"/>
+                                <input type="text" name="wechatid" id="wechat" class="form-control phone"
+                                    placeholder="Wechat ID" />
                             </div>
                         </div>
                         <label for="qq" class="pull-left">QQ: </label>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="text" name="qq" id="qq" class="form-control phone" placeholder="QQ"/>
+                                <input type="text" name="qq" id="qq" class="form-control phone" placeholder="QQ" />
                             </div>
                         </div>
-                        <label for="email" class="pull-left"><span class="req pull-right">* </span> <?= $lang['sub-address'] ?>  <small><?= $lang['email-msg'] ?></small> </label>
+                        <label for="email" class="pull-left"><span class="req pull-right">* </span>
+                            <?= $lang['sub-address'] ?> <small><?= $lang['email-msg'] ?></small> </label>
                         <div class="form-group">
-                            <input class="form-control" required type="text" name="email" id = "email"  onchange="email_validate(this.value);" placeholder="Official Email id"/>
+                            <input class="form-control" required type="text" name="email" id="email"
+                                onchange="email_validate(this.value);" placeholder="Official Email id" />
                             <div class="status" id="status"></div>
                         </div>
-                        <label for="password" class="pull-left"><span class="req pull-right">* </span> <?= $lang['pwd'] ?> </label>
+                        <label for="password" class="pull-left"><span class="req pull-right">* </span>
+                            <?= $lang['pwd'] ?> </label>
                         <div class="col-md-12">
                             <div class="form-group col-md-6">
-                                <input required name="password" type="password" class="form-control inputpass" minlength="8" maxlength="16"  id="pass1" placeholder="Password" onchange="pwd_validate(this.value);" onfocus="clearError();"/> </p>
+                                <input required name="password" type="password" class="form-control inputpass"
+                                    minlength="8" maxlength="16" id="pass1" placeholder="Password"
+                                    onchange="pwd_validate(this.value);" onfocus="clearError();" /> </p>
                                 <div class="status" id="statusPWD"></div>
                             </div>
                             <div class="form-group col-md-6">
                                 <!--<label for="password"><span class="req">* </span> Password Confirm: </label>-->
-                                <input required name="password" type="password" class="form-control inputpass" minlength="8" maxlength="16" placeholder="Enter again to validate"  id="pass2" onkeyup="checkPass(); return false;" />
+                                <input required name="password" type="password" class="form-control inputpass"
+                                    minlength="8" maxlength="16" placeholder="Enter again to validate" id="pass2"
+                                    onkeyup="checkPass(); return false;" />
                                 <span id="confirmMessage" class="confirmMessage"></span>
                             </div>
                         </div>
-                        <label for="website" class="pull-left" style="width:100%"><span class="pull-left"><?= $lang['website'] ?></span></label>
+                        <label for="website" class="pull-left" style="width:100%"><span
+                                class="pull-left"><?= $lang['website'] ?></span></label>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="website" id = "website" placeholder="www.xyzcompanyname.com" onchange="website_validate(this.value);"/>
+                            <input class="form-control" type="text" name="website" id="website"
+                                placeholder="www.xyzcompanyname.com" onchange="website_validate(this.value);" />
                             <div class="status" id="statusweb"></div>
                         </div>
 
@@ -128,11 +172,16 @@
                             <input type="hidden" value="0" name="activate" />
                             <hr>
 
-                            <input type="checkbox" required name="terms" onchange="this.setCustomValidity(validity.valueMissing ? 'Please indicate that you accept the Terms and Conditions' : '');" id="field_terms">   <label for="terms">I agree with the <a href="terms.php" title="You may read our terms and conditions by clicking on this link" target = '_blank'>terms and conditions</a> for Registration.</label><span class="req">* </span>
+                            <input type="checkbox" required name="terms"
+                                onchange="this.setCustomValidity(validity.valueMissing ? 'Please indicate that you accept the Terms and Conditions' : '');"
+                                id="field_terms">   <label for="terms">I agree with the <a href="terms.php"
+                                    title="You may read our terms and conditions by clicking on this link"
+                                    target='_blank'>terms and conditions</a> for Registration.</label><span
+                                class="req">* </span>
                         </div>
 
                         <div class="form-group">
-                            <input class="btn btn-success" type="button" name="submit_reg" value="Register" onclick="registerUser();">
+                            <input class="btn btn-success" type="submit" name="submit_reg" value="Register">
                         </div>
                         <h5><?= $lang['register-msg'] ?> </h5>
                         <h5><?= $lang['register-msg1'] ?> </h5>

@@ -109,20 +109,16 @@
                             <i class="fa fa-home"></i><br><?= $lang['nav-home'] ?>
                         </a>
                     </li>
-                    <!--<li>
-                            <a href="portfolio.php"  class="clickable"><i class="fa fa-camera"></i><br><?= $lang['nav-portfolio'] ?></a>
-                        </li> -->
                     <li>
                         <?php
-                            session_start();
-                            if (isset($_SESSION['user']) && $_SESSION['user'] != '') {
+                            if($loggedUser) {
                                 ?>
-                        <a href="search.php" class="clickable"><i
+                        <a href="search" class="clickable"><i
                                 class="fa fa-search"></i><br><?= $lang['nav-stock'] ?></a>
                         <?php
                             } else {
                                 ?>
-                        <a class="search-page"><i class="fa fa-search"></i><br><?= $lang['nav-stock'] ?></a>
+                        <a href="login" class="search-page"><i class="fa fa-search"></i><br><?= $lang['nav-stock'] ?></a>
                         <script type="text/javascript">
                             $(document).ready(function () {
                                         $('.search-page').parents('li').on('click', function () {
@@ -130,8 +126,6 @@
 														title: "",
 														text: "Please login to access Stock",
 														type: "info"
-													}).then(function() {
-														window.location = "login.php";
 													});
 										});
                                     });

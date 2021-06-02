@@ -20,3 +20,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/contact', 'HomeController@contact');
 Route::get('/login', 'HomeController@login');
 Route::get('/register', 'HomeController@register');
+Route::get('/search', 'HomeController@search');
+
+Route::post('createUser', 'UserController@createUser');
+// Route::get('createUser', 'HomeController@createUser');

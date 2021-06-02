@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Languages;
-use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Services\LanguageService;
 
@@ -47,7 +45,8 @@ class HomeController extends Controller
         return view('register', $this->getParams());
     }
 
-    private function getParams() {
+    private function getParams()
+    {
         return [
             'lang' => $this->languagesArray,
             'loggedUser' => $this->loggedIn,

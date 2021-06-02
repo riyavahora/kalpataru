@@ -51,7 +51,7 @@ $(document).keydown(function (e) {
 <div id="">
     <div class="row" style="padding-top:3%;padding-bottom: 3%;padding-left: 35%">
         <div class="col-md-6" style="z-index: 1099;">
-            <form action="" method="post" id="loginForm" role="form">
+            <form action="loginUser" method="post" id="loginForm" role="form">
                 <fieldset><legend class="text-center"><?= $lang['sign-in-alert'] ?> <span class="req"><small> <?= $lang['req'] ?></small></span></legend>
                     <label class="ErrorMsg"></label>
                     <div class="form-group">
